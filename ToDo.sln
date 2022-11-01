@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDo", "ToDo\ToDo.csproj", "{4FB32802-BD7B-41AB-B3DE-038EDA3212F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{46FD07A7-31E3-44AC-9814-BF6968C9E1AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{2C04FECE-F842-4129-9635-29495EC44FA7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{BE8F5852-F082-462F-9F30-51301F9A96AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4FB32802-BD7B-41AB-B3DE-038EDA3212F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FB32802-BD7B-41AB-B3DE-038EDA3212F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FB32802-BD7B-41AB-B3DE-038EDA3212F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FB32802-BD7B-41AB-B3DE-038EDA3212F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
