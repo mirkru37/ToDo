@@ -5,12 +5,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{46FD07A7-31E3-44AC-9814-BF6968C9E1AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{2C04FECE-F842-4129-9635-29495EC44FA7}"
-	ProjectSection(SolutionItems) = preProject
-		Category.cs = Category.cs
-		Task.cs = Task.cs
-		Task_Category.cs = Task_Category.cs
-		User.cs = User.cs
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{BE8F5852-F082-462F-9F30-51301F9A96AE}"
 EndProject
