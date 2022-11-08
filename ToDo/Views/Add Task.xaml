@@ -1,0 +1,71 @@
+﻿<Window x:Class="ToDo.Views.Add_Task"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:ToDo.Views"
+        mc:Ignorable="d"
+        Background="#ECF0F9"
+        Title="Add Task" Height="734" Width="550">
+    <Grid>
+        
+        <!-- Upper Grid Background-566 108--> 
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.20*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border  Background="#D9E1F2" Height="108"/>
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <!-- Text -->
+                <TextBlock
+                       Text="Add Task"  FontSize="40" Foreground="#264073" FontWeight="SemiBold"/>
+            </StackPanel>
+        </Grid>
+  
+        <!-- Add / Cancel-->
+        <Button HorizontalAlignment="Right" Margin="0,610,40,0" Style="{StaticResource blueButton}" Background="#CF3232">
+            <TextBlock Foreground="Azure">Cancel</TextBlock>
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="40,610,0,0" Style="{StaticResource blueButton}" >
+            <TextBlock Foreground="Azure">Add</TextBlock>
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+     
+        <!--Text boxes-->
+        <StackPanel Orientation="Vertical" >
+            <TextBlock  FontSize="40" Margin="168,145,0,0" Foreground ="#7B93C1" >Task Name</TextBlock>
+            <!--Line-->
+            <Canvas HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="450" Height="3">
+                <Line Stretch="None" X2="1334.54" Y1="3" Y2="3"
+                            Stroke="#CEDBEA"
+                            StrokeThickness="3" HorizontalAlignment="Left" VerticalAlignment="Center" Width="450" />
+            </Canvas>
+
+            <TextBox Style="{StaticResource roundBox}"
+                Width="208" Height="42" Margin="48,20,0,0" Background="#D9E1F2" HorizontalAlignment="Left" Foreground="#899FC8" TextWrapping="Wrap" FontSize="24" >Date
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <TextBox Width="209" Height="41" Margin="48,20,0,0" Background="#D9E1F2" HorizontalAlignment="Left" Foreground="#899FC8" TextWrapping="Wrap" FontSize="24">Time </TextBox>
+            <TextBox Width="219" Height="41" Margin="0,-41,48,0" Background="#D9E1F2" HorizontalAlignment="Right" Foreground="#899FC8" TextWrapping="Wrap" FontSize="24" >Prioritet</TextBox>
+            <TextBox Width="452" Height="41" Margin="48,20,0,0" Background="#D9E1F2" HorizontalAlignment="Left" Foreground="#899FC8" TextWrapping="Wrap" FontSize="24">Categories</TextBox>
+            <TextBox Width="455" Height="181" Margin="48,20,0,0" Background="#D9E1F2" HorizontalAlignment="Left" Foreground="#899FC8" TextWrapping="Wrap" FontSize="24" VerticalScrollBarVisibility="Auto" >Description</TextBox>
+
+        </StackPanel>
+
+    </Grid>
+</Window>
