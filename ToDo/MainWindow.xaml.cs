@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToDo.Model;
 
 namespace ToDo
 {
@@ -25,7 +25,11 @@ namespace ToDo
             InitializeComponent();
             using(ApplicationContext db = new ApplicationContext())
             {
-                Console.WriteLine(db.Tasks.ToList());
+                Category category = new Category(); ;
+                db.Categories.Add(category);
+                List<Category> t = db.Categories.ToList();
+                //Console.WriteLine(t.Count);
+                lable1.Content = t.Count;
             }
             
         }
