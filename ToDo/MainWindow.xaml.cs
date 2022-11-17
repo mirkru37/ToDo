@@ -23,6 +23,11 @@ namespace ToDo
         public MainWindow()
         {
             InitializeComponent();
+            using(ApplicationContext db = new ApplicationContext())
+            {
+                Console.WriteLine(db.Tasks.ToList());
+            }
+            
         }
     }
 }
