@@ -25,8 +25,10 @@ namespace ToDo
             InitializeComponent();
             using(ApplicationContext db = new ApplicationContext())
             {
-                Category category = new Category(); ;
+                Category category = new Category();
+                category.Name = "aaaaa";
                 db.Categories.Add(category);
+                db.SaveChanges();
                 List<Category> t = db.Categories.ToList();
                 //Console.WriteLine(t.Count);
                 lable1.Content = t.Count;
