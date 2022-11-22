@@ -9,28 +9,32 @@
         Background="#ECF0F9"
         Title="Done" Height="541" Width="382">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="243*"/>
+            <ColumnDefinition Width="139*"/>
+        </Grid.ColumnDefinitions>
         <!-- Grid Background-->
-        <Grid>
+        <Grid Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.17*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Border  Background="#D9E1F2" Height="140"/>
         </Grid>
-        
+
         <!-- Grid control -->
-        <Grid>
+        <Grid Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.17*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
-            
-            
+
+
+
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                
+
                 <!-- Return -->
-                <Button  Margin="0, 5,0,0" Width="40" Height="33" Style="{StaticResource blueButton}">
+                <Button  Margin="0, 5,0,0" Width="40" Height="33" Style="{StaticResource blueButton}" Click="OpenMain">
                     <fa:ImageAwesome  Foreground="#D9E1F2" Height="23" Icon="AngleLeft" Style="{StaticResource angle}"/>
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -38,35 +42,35 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                
+
                 <!-- Text -->
                 <TextBlock Margin="10, 0,0,0"
                            Text="Tasks (last month) "  FontSize="30" Foreground="#264073"/>
-                
+
             </StackPanel>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
+
                 <!-- Done/Undone -->
                 <Grid Grid.Row="0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0">
-                    <Button Style="{StaticResource weekButton}">
-                        <TextBlock FontSize="30">Done</TextBlock>
-                    </Button>
-                    <Button Style="{StaticResource weekButton}">
-                        <TextBlock FontSize="30">Undone</TextBlock>
-                    </Button>
-                    </StackPanel> 
+                        <Button Style="{StaticResource weekButton}">
+                            <TextBlock FontSize="30">Done</TextBlock>
+                        </Button>
+                        <Button Style="{StaticResource weekButton}">
+                            <TextBlock FontSize="30">Undone</TextBlock>
+                        </Button>
+                    </StackPanel>
                     <Canvas HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="340" Height="3">
                         <Line HorizontalAlignment="Center" Stretch="None" X1="340" Y1="3" Y2="3"
                               Stroke="#CEDBEA"
                               StrokeThickness="3" />
                     </Canvas>
                 </Grid>
-                
+
                 <!-- Tasks Part-->
                 <Grid Grid.Row="1">
                     <ListBox VerticalAlignment="Top" Width="1340" Height="484" 
@@ -76,7 +80,7 @@
                                 <VirtualizingStackPanel Orientation="Horizontal" />
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
-                        
+
                         <!-- Grid -->
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -84,38 +88,52 @@
                                 <ColumnDefinition Width="190"/>
                             </Grid.ColumnDefinitions>
                             <Grid >
-                                <StackPanel>
-                                    <Border Style="{StaticResource taskBoxBorder}">
-                                        <StackPanel Margin="20,10,20,10">
-                                            <TextBlock Style="{StaticResource taskBoxName}">
-                                                Shopping
-                                            </TextBlock>
-                                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
-                                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}">
-                                                    10.10.22
-                                                </TextBlock>
-                                            </Border>
-                                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
-                                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" >
-                                                    10:00 
-                                                </TextBlock>
-                                            </Border>
-                                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
-                                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}">
-                                                    town
-                                                </TextBlock>
-                                            </Border>
-                                            <TextBlock Style="{StaticResource taskBoxDescription}">
-                                                some description
-                                            </TextBlock>
-                                        </StackPanel>
-                                    </Border>
-                                    
-                                </StackPanel> 
+                                <ListView x:Name="DoneList">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <Border Style="{StaticResource taskBoxBorder}">
+                                                    <Button Margin="20,10,20,10" Style="{StaticResource taskButton}">
+                                                        <StackPanel>
+                                                            <TextBlock Style="{StaticResource taskBoxName}" Text="{Binding Name}"/>
+                                                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
+                                                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" Text="{Binding Deadline, StringFormat='{}{0:h:mm tt}'}"/>
+                                                            </Border>
+                                                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
+                                                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" Text="{Binding Categories}"/>
+                                                            </Border>
+                                                            <TextBlock Style="{StaticResource taskBoxDescription}" Text="{Binding Description}"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                </Border>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
                             </Grid>
                             <Grid Grid.Column="1" >
-                                <StackPanel>
-                                </StackPanel> 
+                                <ListView x:Name="UndoneList">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <Border Style="{StaticResource taskBoxBorder}">
+                                                    <Button Margin="20,10,20,10" Style="{StaticResource taskButton}">
+                                                        <StackPanel>
+                                                            <TextBlock Style="{StaticResource taskBoxName}" Text="{Binding Name}"/>
+                                                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
+                                                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" Text="{Binding Deadline, StringFormat='{}{0:h:mm tt}'}"/>
+                                                            </Border>
+                                                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
+                                                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" Text="{Binding Categories}"/>
+                                                            </Border>
+                                                            <TextBlock Style="{StaticResource taskBoxDescription}" Text="{Binding Description}"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                </Border>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
                             </Grid>
                             <Canvas HorizontalAlignment ="Right" VerticalAlignment="Center" Width="30" Height="483">
                                 <Line Stretch="None" X2="30" X1="30" Y2="360"

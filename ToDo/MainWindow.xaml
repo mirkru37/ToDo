@@ -4,11 +4,44 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
-        xmlns:local="clr-namespace:ToDo"
+        xmlns:local="clr-namespace:ToDo" xmlns:local1="clr-namespace:ToDo.Services"
         mc:Ignorable="d"
         Title="Week" Height="800" Width="1440"
         
         Background="#ECF0F9">
+    <Window.Resources>
+        <DataTemplate x:Key="NotDone">
+            <StackPanel>
+                <Border Style="{StaticResource taskBoxBorder}">
+                    <Button Margin="20,10,20,10" Style="{StaticResource taskButton}" MouseDoubleClick="MarkDone">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource taskBoxName}" Text="{Binding Name}"/>
+                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
+                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" Text="{Binding Deadline, StringFormat='{}{0:h:mm tt}'}"/>
+                            </Border>
+                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
+                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" Text="{Binding Categories}"/>
+                            </Border>
+                            <TextBlock Style="{StaticResource taskBoxDescription}" Text="{Binding Description}"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="Done">
+            <StackPanel>
+                <Border Background="#D7DFEF" Style="{StaticResource taskBoxBorder}">
+                    <Button Margin="20,10,20,10" Style="{StaticResource taskButton}" MouseDoubleClick="MarkUndone">
+                        <TextBlock Style="{StaticResource StrikethroughName}" Text="{Binding Name}"/>
+                    </Button>
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+        <local1:TaskTemplateSelector x:Key="TaskTemplateSelector"
+                               doneTemplate = "{StaticResource Done}"
+                               notDoneTemplate = "{StaticResource NotDone}"
+                             />
+    </Window.Resources>
     <Grid>
         <!-- Grid Background-->
         <Grid>
@@ -46,11 +79,13 @@
             
             <!-- Date -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
-                <Button Style="{StaticResource buttonForAngle}">
+                <Button x:Name="prevWeekBtn" Click="prevWeekBtn_Click" Style="{StaticResource buttonForAngle}">
                     <fa:ImageAwesome Icon="AngleLeft" Style="{StaticResource angle}"/>
                 </Button>
-                <TextBlock Text="September 2022" Height="77" FontSize="48" Foreground="#264073"></TextBlock>
-                <Button Style="{StaticResource buttonForAngle}">
+                <Button x:Name="OpenDoneBtn" Click="OpenDone" Style="{StaticResource buttonForAngle}">
+                    <TextBlock Name="month_text" Text="September 2022" Height="77" FontSize="48" Foreground="#264073"></TextBlock>
+                </Button>
+                <Button x:Name="nextWeekBtn" Click="nextWeekBtn_Click" Style="{StaticResource buttonForAngle}">
                     <fa:ImageAwesome Icon="AngleRight" Style="{StaticResource angle}"/>
                 </Button>
             </StackPanel>  
@@ -66,26 +101,26 @@
                 <Grid Grid.Row="0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
                                 VerticalAlignment="Top" Margin="0,20,0,0">
-                    <Button Style="{StaticResource weekButton}">
-                        <TextBlock>Monday 2.10</TextBlock>
+                    <Button Style="{StaticResource weekButton}" MouseDoubleClick="OpenDay">
+                        <TextBlock Name="day_text_0">Monday 2.10</TextBlock>
                     </Button>
-                    <Button Style="{StaticResource weekButton}">
-                        <TextBlock>Tuesday 3.10</TextBlock>
+                        <Button Style="{StaticResource weekButton}" MouseDoubleClick="OpenDay">
+                            <TextBlock Name="day_text_1">Tuesday 3.10</TextBlock>
                     </Button>
-                    <Button Style="{StaticResource weekButton}">
-                        <TextBlock>Wednesday 4.10</TextBlock>
+                        <Button Style="{StaticResource weekButton}" MouseDoubleClick="OpenDay">
+                            <TextBlock Name="day_text_2">Wednesday 4.10</TextBlock>
                     </Button>
-                    <Button Style="{StaticResource weekButton}">
-                        <TextBlock>Thursday 5.10</TextBlock>
+                        <Button Style="{StaticResource weekButton}" MouseDoubleClick="OpenDay">
+                            <TextBlock Name="day_text_3">Thursday 5.10</TextBlock>
                     </Button>
-                    <Button Style="{StaticResource weekButton}">
-                        <TextBlock>Friday 6.10</TextBlock>
+                        <Button Style="{StaticResource weekButton}" MouseDoubleClick="OpenDay">
+                            <TextBlock Name="day_text_4">Friday 6.10</TextBlock>
                     </Button>
-                    <Button Style="{StaticResource weekButton}">
-                        <TextBlock>Saturday 7.10</TextBlock>
+                        <Button Style="{StaticResource weekButton}" MouseDoubleClick="OpenDay">
+                            <TextBlock Name="day_text_5">Saturday 7.10</TextBlock>
                     </Button>
-                    <Button Style="{StaticResource weekButton}">
-                        <TextBlock>Sunday 8.10</TextBlock>
+                        <Button Style="{StaticResource weekButton}" MouseDoubleClick="OpenDay">
+                            <TextBlock Name="day_text_6">Sunday 8.10</TextBlock>
                     </Button>
                     </StackPanel> 
                     <Canvas HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="1334.54" Height="3">
@@ -102,11 +137,8 @@
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel Orientation="Horizontal" />
                             </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        
-                        
-                        <Grid>
-                            
+                        </ListBox.ItemsPanel>    
+                        <Grid>   
                             <!-- Grid -->
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="190"/>
@@ -140,60 +172,25 @@
                             
                             <!-- Tasks-->
                             <Grid >
-                                <StackPanel>
-                                    <Border Style="{StaticResource taskBoxBorder}">
-                                        <StackPanel Margin="20,10,20,10">
-                                            <TextBlock Style="{StaticResource taskBoxName}">
-                                                Shopping
-                                            </TextBlock>
-                                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
-                                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" >
-                                                    10:00 
-                                                </TextBlock>
-                                            </Border>
-                                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
-                                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}">
-                                                    town
-                                                </TextBlock>
-                                            </Border>
-                                            <TextBlock Style="{StaticResource taskBoxDescription}">
-                                                some description
-                                            </TextBlock>
-                                        </StackPanel>
-                                    </Border>
-                                    
-                                </StackPanel> 
+                                <ListView Name="day_1" ItemTemplateSelector="{StaticResource TaskTemplateSelector}"/>
                             </Grid>
                             <Grid Grid.Column="1" >
-                                <StackPanel>
-                                    <Border Background="#D7DFEF" Style="{StaticResource taskBoxBorder}">
-                                        <StackPanel Margin="20,10,20,10">
-                                            <TextBlock Style="{StaticResource StrikethroughName}">
-                                                Movie time
-                                            </TextBlock>
-                                        </StackPanel>
-                                    </Border>
-                                </StackPanel> 
+                                <ListView Name="day_2" ItemTemplateSelector="{StaticResource TaskTemplateSelector}"/>
                             </Grid>
                             <Grid Grid.Column="2" >
-                                <StackPanel>
-                                </StackPanel> 
+                                <ListView Name="day_3" ItemTemplateSelector="{StaticResource TaskTemplateSelector}"/>
                             </Grid>
                             <Grid Grid.Column="3" >
-                                <StackPanel>
-                                </StackPanel> 
+                                <ListView Name="day_4" ItemTemplateSelector="{StaticResource TaskTemplateSelector}"/>
                             </Grid>
                             <Grid Grid.Column="4" >
-                                <StackPanel>
-                                </StackPanel> 
+                                <ListView Name="day_5" ItemTemplateSelector="{StaticResource TaskTemplateSelector}"/>
                             </Grid>
                             <Grid Grid.Column="5" >
-                                <StackPanel>
-                                </StackPanel> 
+                                <ListView Name="day_6" ItemTemplateSelector="{StaticResource TaskTemplateSelector}"/>
                             </Grid>
                             <Grid Grid.Column="6" >
-                                <StackPanel>
-                                </StackPanel> 
+                                <ListView Name="day_7" ItemTemplateSelector="{StaticResource TaskTemplateSelector}"/>
                             </Grid>
                         </Grid>
                     </ListBox>
