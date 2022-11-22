@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToDo.Models
 {
-    internal class Week
+    public class Week
     {
         public List<DateTime> days;
 

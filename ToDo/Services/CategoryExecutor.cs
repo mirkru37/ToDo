@@ -3,7 +3,7 @@ using ToDo.Model;
 
 namespace ToDo.Services
 {
-    internal class CategoryExecutor
+    public class CategoryExecutor
     {
         public static List<Task_Category> ExecAll()
         {

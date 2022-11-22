@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ToDo.Model
 {
-    internal class Task_Category
+    public class Task_Category
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ToDo.Model
 {
-    internal class User
+    public class User
     {
         [DefaultValue(0)]
         public int Id { get; set; }

@@ -10,7 +10,7 @@ using MySqlX.XDevAPI.Common;
 
 namespace ToDo.Services
 {
-    internal class TaskExecutor
+    public class TaskExecutor
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(App));
         public static void ExecWeek(ref List<Task>[] tasks, Week week)
@@ -44,11 +44,11 @@ namespace ToDo.Services
             return result;
         }
 
-        internal static void ExecDay(ref List<Task> tasks, DateTime date)
+        public static void ExecDay(ref List<Task> tasks, DateTime date)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                tasks = db.Tasks.Where(t => t.Deadline == date).ToList();
+                tasks = db.Tasks.Where(t => t.Deadline.Day == date.Day).ToList();
             }
             log.Info($"{tasks.Count} daily tasks was executed");
         }

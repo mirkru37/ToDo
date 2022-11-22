@@ -8,7 +8,7 @@ using ToDo.Model;
 
 namespace ToDo.Services
 {
-    internal class TaskTemplateSelector:DataTemplateSelector
+    public class TaskTemplateSelector:DataTemplateSelector
     {
         public DataTemplate doneTemplate { get; set; }
         public DataTemplate notDoneTemplate { get; set; }

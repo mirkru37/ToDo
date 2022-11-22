@@ -8,7 +8,7 @@ using ToDo.Model;
 
 namespace ToDo.Services
 {
-    internal class TaskManager
+    public class TaskManager
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(App));
         public static void UpdateDone(Task task, bool value)
