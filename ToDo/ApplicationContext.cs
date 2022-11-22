@@ -3,7 +3,7 @@ using ToDo.Model;
 
 namespace ToDo
 {
-    internal class ApplicationContext : DbContext
+    public class ApplicationContext : DbContext
     {
 
         public DbSet<User> Users { get; set; }

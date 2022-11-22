@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToDo.Model
 {
-    internal class Category
+    public class Category
     {
         public Category(string name)
         {
