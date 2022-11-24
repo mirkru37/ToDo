@@ -19,7 +19,7 @@ namespace ToDo.Services
             {
                 for (int i = 0; i < week.days.Count; i++)
                 {
-                    tasks[i] = db.Tasks.Where(t => t.Deadline == week.days[i]).ToList();
+                    tasks[i] = db.Tasks.Where(t => t.Deadline.Date == week.days[i].Date).ToList();
                 }
             }
             log.Info($"Wekly tasks was executed. Week day: {week.days[0]}");

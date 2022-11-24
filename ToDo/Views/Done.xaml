@@ -82,65 +82,75 @@
                         </ListBox.ItemsPanel>
 
                         <!-- Grid -->
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="190"/>
-                                <ColumnDefinition Width="190"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid >
-                                <ListView x:Name="DoneList">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel>
-                                                <Border Style="{StaticResource taskBoxBorder}">
-                                                    <Button Margin="20,10,20,10" Style="{StaticResource taskButton}">
-                                                        <StackPanel>
-                                                            <TextBlock Style="{StaticResource taskBoxName}" Text="{Binding Name}"/>
-                                                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
-                                                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" Text="{Binding Deadline, StringFormat='{}{0:h:mm tt}'}"/>
-                                                            </Border>
-                                                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
-                                                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" Text="{Binding Categories}"/>
-                                                            </Border>
-                                                            <TextBlock Style="{StaticResource taskBoxDescription}" Text="{Binding Description}"/>
-                                                        </StackPanel>
-                                                    </Button>
-                                                </Border>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </Grid>
-                            <Grid Grid.Column="1" >
-                                <ListView x:Name="UndoneList">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel>
-                                                <Border Style="{StaticResource taskBoxBorder}">
-                                                    <Button Margin="20,10,20,10" Style="{StaticResource taskButton}">
-                                                        <StackPanel>
-                                                            <TextBlock Style="{StaticResource taskBoxName}" Text="{Binding Name}"/>
-                                                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
-                                                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" Text="{Binding Deadline, StringFormat='{}{0:h:mm tt}'}"/>
-                                                            </Border>
-                                                            <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
-                                                                <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" Text="{Binding Categories}"/>
-                                                            </Border>
-                                                            <TextBlock Style="{StaticResource taskBoxDescription}" Text="{Binding Description}"/>
-                                                        </StackPanel>
-                                                    </Button>
-                                                </Border>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </Grid>
-                            <Canvas HorizontalAlignment ="Right" VerticalAlignment="Center" Width="30" Height="483">
-                                <Line Stretch="None" X2="30" X1="30" Y2="360"
+                        <ListBox  VerticalAlignment="Top" Width="370" Height="370" 
+                                  Background="#ECF0F9" BorderThickness="0" Margin="0,-80,10,10">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="173"/>
+                                    <ColumnDefinition Width="173"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid >
+
+                                    <ListView x:Name="DoneList">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <Border Style="{StaticResource taskBoxBorder}">
+                                                        <Button Margin="20,10,20,10" Style="{StaticResource taskButton}">
+                                                            <StackPanel>
+                                                                <TextBlock Style="{StaticResource taskBoxName}" Text="{Binding Name}"/>
+                                                                <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
+                                                                    <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" Text="{Binding Deadline, StringFormat='{}{0:h:mm tt}'}"/>
+                                                                </Border>
+                                                                <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
+                                                                    <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" Text="{Binding Categories}"/>
+                                                                </Border>
+                                                                <TextBlock Style="{StaticResource taskBoxDescription}" Text="{Binding Description}"/>
+                                                            </StackPanel>
+                                                        </Button>
+                                                    </Border>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </Grid>
+                                <Grid Grid.Column="1" >
+                                    <ListView x:Name="UndoneList">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <Border Style="{StaticResource taskBoxBorder}">
+                                                        <Button Margin="20,10,20,10" Style="{StaticResource taskButton}">
+                                                            <StackPanel>
+                                                                <TextBlock Style="{StaticResource taskBoxName}" Text="{Binding Name}"/>
+                                                                <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
+                                                                    <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" Text="{Binding Deadline, StringFormat='{}{0:h:mm tt}'}"/>
+                                                                </Border>
+                                                                <Border  Style="{StaticResource taskBoxCategory_TimeBorder}">
+                                                                    <TextBlock Style="{StaticResource taskBoxCategory_TimeText}" Text="{Binding Categories}"/>
+                                                                </Border>
+                                                                <TextBlock Style="{StaticResource taskBoxDescription}" Text="{Binding Description}"/>
+                                                            </StackPanel>
+                                                        </Button>
+                                                    </Border>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </Grid>
+                                <Canvas HorizontalAlignment ="Right" VerticalAlignment="Center" Width="30" Height="483">
+                                    <Line Stretch="None" X2="30" X1="30" Y2="360"
                                       Stroke="#CEDBEA"
                                       StrokeThickness="2" />
-                            </Canvas>
-                        </Grid>
+                                </Canvas>
+                            </Grid>
+                        </ListBox>
                     </ListBox>
                 </Grid>
             </Grid>

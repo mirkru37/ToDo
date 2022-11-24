@@ -1,0 +1,58 @@
+﻿<Window x:Name="windowAddCategory" x:Class="ToDo.Views.AddCategory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:ToDo.Views"
+        mc:Ignorable="d"
+        Background="#ECF0F9"
+        Title="Add Cotegory" Height="370" Width="550">
+    <Grid>
+
+        <!-- Upper Grid Background-566 108-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.20*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border  Background="#D9E1F2" Height="108"/>
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <!-- Text -->
+                <TextBlock
+                       Text="Add Category"  FontSize="40" Foreground="#264073" FontWeight="SemiBold"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Add / Cancel-->
+        <Button HorizontalAlignment="Right" Margin="0,265,36,0" Style="{StaticResource blueButton}" Background="#CF3232" Click="Button_Click" VerticalAlignment="Top">
+            <TextBlock Foreground="Azure">Cancel</TextBlock>
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Click="Add_Category" HorizontalAlignment="Left" Margin="44,265,0,0" Style="{StaticResource blueButton}" VerticalAlignment="Top" >
+            <TextBlock Foreground="Azure">Add</TextBlock>
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+
+        <!--Text boxes-->
+        <StackPanel x:Name="addTaskFrom" Orientation="Vertical" >
+            <TextBox x:Name="CategoryName"  FontSize="40" Margin="0,145,0,0" Foreground ="#7B93C1" TextAlignment="Center" Background="Transparent">Category Name</TextBox>
+            <!--Line-->
+            <Canvas HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="450" Height="3">
+                <Line Stretch="None" X2="1334.54" Y1="3" Y2="3"
+                            Stroke="#CEDBEA"
+                            StrokeThickness="3" HorizontalAlignment="Left" VerticalAlignment="Center" Width="450" />
+            </Canvas>
+
+        </StackPanel>
+
+    </Grid>
+</Window>

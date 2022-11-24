@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,7 @@ namespace ToDo
         private List<Task>[] tasks = new List<Task>[7];
         private Week week = new Week(DateTime.Today);
         private DateTime currentDate = DateTime.Today;
+        private Window addTaskWindow = new Window();
 
         public MainWindow()
         {
@@ -95,6 +97,21 @@ namespace ToDo
         {
             Window done = new Done(currentDate);
             done.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Window addTaskWindow = new Add_Task();
+            addTaskWindow.Closing += (o, args) => {
+                InitialRender();
+            };
+            addTaskWindow.Show();
+        }
+
+        private void AddCategory(object sender, RoutedEventArgs e)
+        {
+            Window addTaskWindow = new AddCategory();
+            addTaskWindow.Show();
         }
     }
 }

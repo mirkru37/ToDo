@@ -1,13 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ToDo.Model;
+using ToDo.Models;
 
 namespace ToDo.Services
 {
     public class CategoryExecutor
     {
-        public static List<Task_Category> ExecAll()
+        public static List<Category> ExecAll()
         {
-            List<Task_Category> result = new List<Task_Category>();
+            List<Category> result = new List<Category>();
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                result = db.Categories.ToList();
+            }
             return result;
         }
     }

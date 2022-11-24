@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:ToDo" xmlns:local1="clr-namespace:ToDo.Services"
         mc:Ignorable="d"
         Title="Week" Height="800" Width="1440"
-        
+        WindowStartupLocation="CenterScreen"
         Background="#ECF0F9">
     <Window.Resources>
         <DataTemplate x:Key="NotDone">
@@ -60,15 +60,15 @@
             </Grid.RowDefinitions>
             
             <!-- Add/Statistic-->
-            <Button HorizontalAlignment="Right" Margin="0,0,40,0" Style="{StaticResource blueButton}">
-                <TextBlock Foreground="Azure">Statistic</TextBlock>
+            <Button Click="AddCategory" HorizontalAlignment="Right" Margin="0,0,40,0" Style="{StaticResource blueButton}">
+                <TextBlock Foreground="Azure">Add category</TextBlock>
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="20"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button HorizontalAlignment="Left" Margin="40,0,0,0" Style="{StaticResource blueButton}">
+            <Button HorizontalAlignment="Left" Margin="40,0,0,0" Style="{StaticResource blueButton}" Click="Button_Click">
                 <TextBlock Foreground="Azure">Add task</TextBlock>
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">

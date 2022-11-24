@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using ToDo.Model;
 using ToDo.Models;
 using ToDo.Services;
+using System.Windows.Media.Animation;
 
 namespace ToDo.Views;
 
@@ -19,6 +20,10 @@ public partial class Day : Window
         this.date = date;
         InitializeComponent();
         InitialRender();
+        TaskList.Measure(new Size(TaskList.MaxWidth, TaskList.MaxHeight));
+        DoubleAnimation heightAnimation = new DoubleAnimation(TaskList.DesiredSize.Height, new Duration(TimeSpan.FromSeconds(2)));
+        TaskList.Height = 0;
+        TaskList.BeginAnimation(HeightProperty, heightAnimation);
     }
 
     private void InitialRender()
@@ -59,5 +64,19 @@ public partial class Day : Window
         Task task = (Task)((FrameworkElement)e.Source).DataContext;
         TaskManager.UpdateDone(task, true);
         InitialRender();
+    }
+
+    private void CreateTask(object sender, RoutedEventArgs e)
+    {
+        Window addTaskWindow = new Add_Task();
+        addTaskWindow.Closing += (o, args) => {
+            InitialRender();
+        };
+        addTaskWindow.Show();
+    }
+    private void AddCategory(object sender, RoutedEventArgs e)
+    {
+        Window addTaskWindow = new AddCategory();
+        addTaskWindow.Show();
     }
 }
