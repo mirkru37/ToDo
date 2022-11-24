@@ -4,14 +4,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
-        xmlns:local="clr-namespace:ToDo.Views"
+        xmlns:local="clr-namespace:ToDo.Views" 
+        xmlns:local1="clr-namespace:ToDo.Services"
         mc:Ignorable="d"
         Background="#ECF0F9"
+        WindowStartupLocation="CenterScreen"
         Title="Calendar" Height="800" Width="1440">
+    
+
+    <Window.Resources >
+        <DataTemplate x:Key="NotDone">
+            <Border Background="#C6D3EC" Width="1309" Height="92" CornerRadius="20">
+                <Button Style="{StaticResource taskButton}" MouseDoubleClick="MarkDone">
+                    <StackPanel Orientation="Horizontal">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="330"/>
+                                <ColumnDefinition Width="410"/>
+                                <ColumnDefinition Width="390"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Name}" FontSize="25" Foreground="#264073" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Description}" Grid.Column="1" FontSize="25" Foreground="#264073" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Categories}"  Grid.Column="2" FontSize="25" Foreground="#264073" VerticalAlignment="Center"/>
+                            <TextBlock  Grid.Column="3" Text="{Binding Deadline, StringFormat='{}{0:h:mm tt}'}" FontSize="25" Foreground="#264073"  VerticalAlignment="Center" />
+                        </Grid>
+                    </StackPanel>
+                </Button>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="Done">
+            <Border Background="#C6D3EC" Width="1309" Height="92" CornerRadius="20">
+                <Button Style="{StaticResource taskButton}" MouseDoubleClick="MarkUndone">
+                    <StackPanel Orientation="Horizontal">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="330"/>
+                                <ColumnDefinition Width="410"/>
+                                <ColumnDefinition Width="390"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock TextDecorations="Strikethrough"  Text="{Binding Name}" FontSize="25" Foreground="#8A97AF" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Column="1" TextDecorations="Strikethrough"  Text="{Binding Description}" FontSize="25" Foreground="#8A97AF"  VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" TextDecorations="Strikethrough"  Text="{Binding Categories}" FontSize="25" Foreground="#8A97AF"  VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="3" TextDecorations="Strikethrough"  Text="{Binding Deadline, StringFormat='{}{0:h:mm tt}'}" FontSize="25" Foreground="#8A97AF"  VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </Button>
+            </Border>
+        </DataTemplate>
+        <local1:TaskTemplateSelector x:Key="TaskTemplateSelector"
+                               doneTemplate = "{StaticResource Done}"
+                               notDoneTemplate = "{StaticResource NotDone}"
+                             />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="392*"/>
-            <RowDefinition Height="87*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!-- Grid Background-->
         <Grid>
@@ -29,15 +79,15 @@
             </Grid.RowDefinitions>
 
             <!-- Add/Statistic-->
-            <Button HorizontalAlignment="Right" Margin="0,0,40,0" Style="{StaticResource blueButton}">
-                <TextBlock Foreground="Azure">See Statistic</TextBlock>
+            <Button Click="AddCategory" HorizontalAlignment="Right" Margin="0,0,40,0" Style="{StaticResource blueButton}">
+                <TextBlock Foreground="Azure">Add category</TextBlock>
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="20"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button HorizontalAlignment="Left" Margin="40,0,0,0" Style="{StaticResource blueButton}">
+            <Button Click="CreateTask" HorizontalAlignment="Left" Margin="40,0,0,0" Style="{StaticResource blueButton}">
                 <TextBlock Foreground="Azure">Add task</TextBlock>
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -48,16 +98,18 @@
 
             <!-- Date -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
-                <Button Style="{StaticResource buttonForAngle}">
+                <Button Style="{StaticResource buttonForAngle}" Click="PrevDay">
                     <fa:ImageAwesome Icon="AngleLeft" Style="{StaticResource angle}"/>
                 </Button>
-                <TextBlock Text="Monday, 2 September 2022" Height="77" FontSize="48" Foreground="#264073"></TextBlock>
-                <Button Style="{StaticResource buttonForAngle}">
+                <Button Style="{StaticResource buttonForAngle}" MouseDoubleClick="OpenMain">
+                    <TextBlock Name="headerText" Text="Monday, 2 September 2022" Height="77" FontSize="48" Foreground="#264073"></TextBlock>
+                </Button>
+                <Button Style="{StaticResource buttonForAngle}" Click="NextDay">
                     <fa:ImageAwesome Icon="AngleRight" Style="{StaticResource angle}"/>
                 </Button>
             </StackPanel>
 
-            
+
         </Grid>
         <StackPanel Orientation="Horizontal"  Margin="0,165,0,0" Width="1430">
             <TextBlock FontSize="40" HorizontalAlignment="Left" Margin="120,0,0,0" Foreground="#264073">Task</TextBlock>
@@ -66,18 +118,19 @@
             <TextBlock FontSize="40" HorizontalAlignment="Right" Margin="200,0,60,0" Foreground="#264073">Time</TextBlock>
         </StackPanel>
 
-        <Canvas HorizontalAlignment="Center" Width="1334.54" Height="3" Margin="0,-150,0,0" >
+        <Canvas HorizontalAlignment="Center" Width="1334.54" Height="3" Margin="0,-290,0,0" >
             <Line Stretch="None" X2="1334.54" Y1="3" Y2="3"
                             Stroke="#CEDBEA"
                             StrokeThickness="3" />
         </Canvas>
-        <Border Background="#C6D3EC" Width="1309" Height="92" CornerRadius="20">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock FontSize="25" Foreground="#264073" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">Shopping</TextBlock >
-                <TextBlock FontSize="25" Foreground="#264073" Margin="180,0,0,0" VerticalAlignment="Center">SomeDescription</TextBlock>
-                <TextBlock FontSize="25" Foreground="#264073" Margin="280,0,0,0" VerticalAlignment="Center">Town</TextBlock>
-                <TextBlock FontSize="25" Foreground="#264073" Margin="300,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right">11:30</TextBlock>
-            </StackPanel>
-        </Border>
+        <ListBox  Grid.Row="0" VerticalAlignment="Top" Width="1400" Height="500" 
+                  Background="#ECF0F9" BorderThickness="0" Margin="10,292,5,10">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListView Name="TaskList" ItemTemplateSelector="{StaticResource TaskTemplateSelector}" Height="500" Width="1370" Grid.RowSpan="2"/>
+        </ListBox>
     </Grid>
 </Window>
